@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SAMOS Digital Library Design System - All colors MUST be HSL */
+
+@layer base {
+  :root {
+    /* SAMOS Brand Colors */
+    --samos-blue: 215 100% 15%;           /* #0F172A - Primary brand */
+    --samos-amber: 43 96% 56%;            /* #F59E0B - Accent/CTA */
+    --soft-white: 220 14% 96%;            /* #F9FAFB - Background */
+    
+    /* Core System Colors */
+    --background: 220 14% 96%;            /* Soft white */
+    --foreground: 215 25% 27%;            /* Dark blue-gray text */
+    
+    --card: 0 0% 100%;                    /* White cards */
+    --card-foreground: 215 25% 27%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+    
+    --primary: 215 100% 15%;              /* SAMOS Blue */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 220 14% 92%;             /* Light gray */
+    --secondary-foreground: 215 25% 27%;
+    
+    --muted: 220 14% 92%;
+    --muted-foreground: 215 8% 47%;       /* Medium gray */
+    
+    --accent: 43 96% 56%;                 /* SAMOS Amber */
+    --accent-foreground: 215 100% 15%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 43 96% 56%;                   /* Amber focus ring */
+    
+    --radius: 0.75rem;                    /* Slightly more rounded */
+    
+    /* Reading Interface Colors */
+    --reader-bg: 47 100% 97%;             /* Warm reading background */
+    --reader-text: 215 25% 27%;
+    --highlight: 43 96% 85%;              /* Light amber for highlights */
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--samos-blue)), hsl(215 100% 25%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(var(--soft-white)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--samos-amber)), hsl(43 96% 70%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -2px hsl(var(--samos-blue) / 0.08);
+    --shadow-card: 0 2px 16px -4px hsl(var(--samos-blue) / 0.12);
+    --shadow-button: 0 2px 8px -2px hsl(var(--samos-amber) / 0.3);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
+  }
+
+  .dark {
+    --background: 215 28% 7%;             /* #111827 - Dark background */
+    --foreground: 220 14% 96%;
+    
+    --card: 215 28% 10%;
+    --card-foreground: 220 14% 96%;
+    
+    --popover: 215 28% 10%;
+    --popover-foreground: 220 14% 96%;
+    
+    --primary: 220 14% 96%;               /* Light in dark mode */
+    --primary-foreground: 215 100% 15%;
+    
+    --secondary: 215 25% 15%;
+    --secondary-foreground: 220 14% 96%;
+    
+    --muted: 215 25% 15%;
+    --muted-foreground: 215 8% 65%;
+    
+    --accent: 43 96% 56%;                 /* Keep amber in dark */
+    --accent-foreground: 215 28% 7%;
+    
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 220 14% 96%;
+    
+    --border: 215 25% 15%;
+    --input: 215 25% 15%;
+    --ring: 43 96% 56%;
+    
+    --reader-bg: 215 28% 7%;
+    --reader-text: 220 14% 96%;
+    --highlight: 43 96% 25%;
+    
+    --shadow-soft: 0 4px 20px -2px hsl(0 0% 0% / 0.4);
+    --shadow-card: 0 2px 16px -4px hsl(0 0% 0% / 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-merriweather;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/30;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+@layer components {
+  /* Beautiful gradient buttons */
+  .btn-gradient {
+    @apply bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-[var(--shadow-button)] hover:shadow-lg hover:from-amber-600 hover:to-amber-700 transition-all duration-200;
+  }
+  
+  /* Hero section styling */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  /* Card with soft shadow */
+  .card-soft {
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    @apply backdrop-blur-sm;
+  }
+  
+  /* Reading interface styles */
+  .reader-container {
+    background: hsl(var(--reader-bg));
+    color: hsl(var(--reader-text));
+  }
+  
+  /* Highlight animation */
+  .highlight-text {
+    background: linear-gradient(120deg, transparent 0%, hsl(var(--highlight)) 0%);
+    background-size: 0% 100%;
+    transition: background-size 0.6s ease;
+  }
+  
+  .highlight-text:hover {
+    background-size: 100% 100%;
+  }
+}
